@@ -3,17 +3,14 @@ const { Link } = ReactRouterDOM
 import { NotePreview } from './NotePreview.jsx'
 
 export function NoteList({ notes, onDeleNote }) {
-    
-    return (
-        <ul>
-            {notes.map(note => (
-                <NotePreview onDeleNote={onDeleNote} note={note} key={note.id} />
-            ))}
-        </ul>
-    )
+  return (
+    <ul>
+      {notes.map(note => (
+        <NotePreview onDeleNote={onDeleNote} note={note} key={note.id} />
+      ))}
+    </ul>
+  )
 }
-
-
 
 /* <button className="button button--blue">
            <Link to={`/note/${note.id}`}>Select Note</Link>
