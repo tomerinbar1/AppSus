@@ -4,7 +4,7 @@ import { utilService } from '../../../services/utilService.js'
 import {storageService } from "../../../services/storageService.js";
 const NOTE_KEY = 'noteDB'
 
-const notes = [
+const gNotes = [
     {
         id: 'n001',
         type: 'NoteTxt',
@@ -150,7 +150,8 @@ const notes = [
     }
 ]
 
-save ()
+_createNotes()
+
 export const noteService = {
     query,
     get,
@@ -158,16 +159,8 @@ export const noteService = {
     save
 }
 
-function query(filterBy = {}) {
+function query() {
     return asyncStorage.query(NOTE_KEY).then(notes => {
-        if (filterBy.title) {
-            const regExp = new RegExp(filterBy.title, 'n')
-            notes = notes.filter(note => regExp.test(note.title))
-        }
-
-          if (filterBy.maxPrice) { // filter by time???
-            notes = notes.filter(note => note.listPrice.amount >= filterBy.maxPrice)
-          }
         return notes
     })
 }
@@ -182,6 +175,14 @@ function save(note) {
     if (note.id) {
         return asyncStorage.put(NOTE_KEY, note)
     } else {
-        return storageService.post(NOTE_KEY, note)
+        return asyncStorage.post(NOTE_KEY, note)
     }
 }
+
+function _createNotes() {
+    let notes = storageService.loadFromStorage(NOTE_KEY) || []
+    if (!notes || !notes.length) {
+        notes = gNotes
+      storageService.saveToStorage(NOTE_KEY, notes)
+    }
+  }

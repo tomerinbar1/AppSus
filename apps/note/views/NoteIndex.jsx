@@ -16,14 +16,12 @@ export function NoteIndex() {
   
 
     function loadNotes() {
-        noteService.get('n001').then(() => setNotes(notes));
+        noteService.query().then(note => setNotes(note));
       }
 
 
 
-    // function loadNotes() {
-    //   noteService.query(filterBy).then((notes) => setNotes(notes));
-    // }
+ 
   
     return (
       <section className="note-index">
