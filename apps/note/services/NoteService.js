@@ -1,7 +1,7 @@
 // note service
 import { asyncStorage } from '../../../services/asyncStorageService.js'
 import { utilService } from '../../../services/utilService.js'
-import {storageService } from "../../../services/storageService.js";
+import { storageService } from "../../../services/storageService.js";
 const NOTE_KEY = 'noteDB'
 
 const gNotes = [
@@ -156,7 +156,23 @@ export const noteService = {
     query,
     get,
     remove,
-    save
+    save,
+    _createNote,
+    getEmptyNote
+}
+
+
+function getEmptyNote(txt = '') {
+    return {
+        txt,
+        type: 'NoteTxt',
+    }
+}
+
+function _createNote(type = 'NoteTxt', txt) {
+    const note = getEmptyNote(type, txt)
+    note.id = utilService.makeId()
+    return note
 }
 
 function query() {
@@ -183,6 +199,6 @@ function _createNotes() {
     let notes = storageService.loadFromStorage(NOTE_KEY) || []
     if (!notes || !notes.length) {
         notes = gNotes
-      storageService.saveToStorage(NOTE_KEY, notes)
+        storageService.saveToStorage(NOTE_KEY, notes)
     }
-  }
+}

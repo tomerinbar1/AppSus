@@ -4,7 +4,7 @@ const { Link } = ReactRouterDOM
 import { NoteList } from "../cmps/NoteList.jsx";
 import { NotePreview } from "../cmps/NotePreview.jsx";
 import { noteService } from "../services/NoteService.js";
-
+import { CreateNote } from "../cmps/CreateNote.jsx";
 // var filterBy={}
 
 export function NoteIndex() {
@@ -14,25 +14,40 @@ export function NoteIndex() {
       loadNotes();
     }, []);
   
+    function onAddNote(value){
+        noteService.save(value)
+        .then(noteService.getEmptyNote(value))
+         
+    }
 
+
+
+
+    function onDeleNote(noteId){
+        console.log('noteId',noteId)
+        noteService.remove(noteId)
+        .then(value =>console.log('value print noteidx',value))
+        .then(()=>{
+            const updatedNotes = notes.filter((note)=>note.id!==noteId)
+            setNotes(updatedNotes)
+        })
+    }
     function loadNotes() {
-        noteService.query().then(note => setNotes(note));
+        noteService.query()
+        .then(note => setNotes(note));
       }
-
-
-
- 
-  
     return (
       <section className="note-index">
         {/* <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} /> */}
+        {/* <CreateNote /> */}
         <button className="button button--green">
           <Link to="/note/edit">Edit Note</Link>
         </button>
         <button className="button button--green">
           <Link to="/note/add">Add Note</Link>
         </button>
-        <NoteList notes={notes} /> {/* Pass the notes prop here */}
+        <NoteList onDeleNote={onDeleNote} notes={notes} /> {/* Pass the notes prop here */}
+        
       </section>
     );
   }

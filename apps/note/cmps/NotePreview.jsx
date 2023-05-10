@@ -1,5 +1,17 @@
-export const  NotePreview = ({ note }) =>  {
+
+
+
+
+
+
+
+export const  NotePreview = ({ note, onDeleNote }) =>  {
+    function onHandleClick(ev){
+        ev.stopPropagation()
+        onDeleNote(note.id)
+    }
     return <li>{note.id}
+    <button onClick ={onHandleClick}>X</button>
         </li>
 }
 
