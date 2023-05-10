@@ -1,6 +1,3 @@
-
-
-
 const { Link } = ReactRouterDOM
 
 import { NotePreview } from './NotePreview.jsx'

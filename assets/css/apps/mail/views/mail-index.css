@@ -1,1 +1,11 @@
- /* mail index  */
+.mail-app{
+    padding: 0 20px;
+}
+
+.right-side{
+    flex-grow: 4;
+}
+
+.left-side{
+    flex-grow: 1;
+}

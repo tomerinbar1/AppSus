@@ -2,13 +2,15 @@ import { asyncStorage } from "../../../services/AsyncStorageService.js"
 import {storageService} from '../../../services/StorageService.js'
 
 export const MailService = {
-  query,
-  get,
-  remove,
+  getEmails,
+  getEmail,
+  removeEmail,
   createEmail,
+  saveEmail,
+  updateEmail,
 }
 
-const loggedinUser = { email: 'tomerinbar1@gmail.com', fullName: 'Tomer Inbar' }
+const logginUser = { email: 'tomerinbar1@gmail.com', fullName: 'Tomer Inbar' }
 
 const MAIL_KEY = 'mailsDB'
 
@@ -21,7 +23,7 @@ const gMails = [
     sentAt: 1551133930594,
     removedAt: null,
     from: 'momo@momo.com',
-    to: 'user@appsus.com',
+    to: ['user1@appsus.com', 'user2@appsus.com', ],
   },
   {
     id: 'e102',
@@ -31,7 +33,7 @@ const gMails = [
     sentAt: 1652223600000,
     removedAt: null,
     from: 'jane@acme.com',
-    to: 'tomerinbar1@gmail.com',
+    to: ['tomerinbar1@gmail.com'],
   },
   {
     id: 'e103',
@@ -41,7 +43,7 @@ const gMails = [
     sentAt: 1652200800000,
     removedAt: null,
     from: 'marketing@company.com',
-    to: 'tomerinbar1@gmail.com',
+    to: ['tomerinbar1@gmail.com'],
   },
   {
     id: 'e104',
@@ -51,7 +53,7 @@ const gMails = [
     sentAt: 1652167200000,
     removedAt: null,
     from: 'joe@example.com',
-    to: 'tomerinbar1@gmail.com',
+    to: ['tomerinbar1@gmail.com', 'user1@appsus.com'],
   },
   {
     id: 'e105',
@@ -61,7 +63,7 @@ const gMails = [
     sentAt: 1652148000000,
     removedAt: null,
     from: 'support@company.com',
-    to: 'tomerinbar1@gmail.com',
+    to: ['tomerinbar1@gmail.com', 'user2@appsus.com'],
   },
   {
     id: 'e106',
@@ -71,76 +73,44 @@ const gMails = [
     sentAt: 1652054400000,
     removedAt: null,
     from: 'jenny@example.com',
-    to: 'tomerinbar1@gmail.com',
+    to: ['tomerinbar1@gmail.com', 'user3@appsus.com'],
   },
-  {
-    id: 'e107',
-    subject: 'Regarding your job application',
-    body: 'Thank you for submitting your application. We would like to schedule an interview with you next week.',
-    isRead: false,
-    sentAt: 1651960800000,
-    removedAt: null,
-    from: 'hr@company.com',
-    to: 'tomerinbar1@gmail.com',
-  },
-  {
-    id: 'e108',
-    subject: 'Invitation to participate in survey',
-    body: 'We value your opinion and would appreciate if you could complete a short survey about our product.',
-    isRead: true,
-    sentAt: 1651910400000,
-    removedAt: null,
-    from: 'survey@company.com',
-    to: 'tomerinbar1@gmail.com',
-  },
-  {
-    id: 'e109',
-    subject: 'Congratulations!',
-    body: 'You have been selected as the winner of our giveaway. Please respond with your contact information to claim your prize.',
-    isRead: false,
-    sentAt: 1651778400000,
-    removedAt: null,
-    from: 'giveaway@company.com',
-    to: 'tomerinbar1@gmail.com',
-  },
-  {
-    id: 'e110',
-    subject: 'Reminder: doctor appointment tomorrow',
-    body: "Just a friendly reminder that you have a doctor appointment tomorrow at 10am. Don't forget to bring your insurance card.",
-    isRead: false,
-    sentAt: 1651778400000,
-    removedAt: null,
-    from: 'doctor@clinic.com',
-    to: 'tomerinbar1@gmail.com',
-  },
-]
+];
+
 
 _createEmails()
 
-function query() {
+async function getEmails() {
   return asyncStorage.query(MAIL_KEY).then(mails => {
     return mails
   })
 }
 
-function get(mailId) {
+async function getEmail(mailId) {
   return asyncStorage.get(MAIL_KEY, mailId)
 }
 
-function remove(mailId) {
+async function removeEmail(mailId) {
   return asyncStorage.remove(MAIL_KEY, mailId)
+}
+
+async function saveEmail(email) {
+  return asyncStorage.post(MAIL_KEY, email)
+}
+
+async function updateEmail(email) {
+  return asyncStorage.put(MAIL_KEY, email)
 }
 
 function createEmail() {
   return {
-    id: '',
     subject: '',
     body: '',
     isRead: false,
     sentAt: Date.now(),
     removedAt: null,
-    from: loggedinUser.email,
-    to: '',
+    from: logginUser,
+    to: [],
   }
 }
 
