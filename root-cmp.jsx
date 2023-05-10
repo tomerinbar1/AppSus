@@ -9,8 +9,6 @@ import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
 import { UserMsg } from "./cmps/UserMessage.jsx"
 
 
-
-
 export function App() {
     return <Router>
         <section className="app">

@@ -1,1 +1,10 @@
- /* mail list */
+.mail-list {
+  background-color: var(--email-list-color);
+  border-radius: 15px;
+}
+
+li{
+    list-style: none;
+    height: 20px;
+    padding-block: 10px;
+}

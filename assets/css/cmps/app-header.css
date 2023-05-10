@@ -1,24 +1,27 @@
-header {
-    background: lightcyan;
-    border-bottom: 2px solid white;
-}
-
 .app-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
+  background-color: var(--main-app-color);
+padding: 10px 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 nav a {
-    margin: .5em;
+  margin-inline: 10px;
 }
 
-nav a:active {
-    color: purple;
+.search-bar{
+flex-grow: 1;
+padding-inline-start: 30px;
+padding-inline-end: 30px;
 }
 
-nav a.active {
-    color: darkblue;
-    font-weight: bold;
-    text-decoration: overline;
+.search-bar input {
+  height: 46px;
+width: 100%;
+  padding: 0;
+  border: 0;
+  background-color: var(--search-bar-color);
+  border-radius: 10px;
+  padding-inline-start: 20px;
 }

@@ -1,3 +1,8 @@
 :root {
-    --main-bg-color: lightblue;
+  /* Gmail Color */
+  --main-app-color: #f6f8fc;
+  --email-list-color: #ffffff;
+  --main-filter-hover-color: #d3e3fd;
+  --search-bar-color: #eaf1fb;
+  /* Google Keeper */
 }
