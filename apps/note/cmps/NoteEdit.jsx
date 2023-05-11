@@ -25,12 +25,12 @@ export function NoteEdit() {
   function handleChange({ target }) {
     const field = target.name
     const value = target.type === 'number' ? +target.value || '' : target.value
-    setBookToEdit(prevNote => ({ ...prevNote, [field]: value }))
+    setNoteToEdit(prevNote => ({ ...prevNote, [field]: value }))
   }
 
   function onSaveNote(ev) {
     ev.preventDefault()
-    noteService.save(noteToEdit).then(() => {
+    noteService.saveNote(noteToEdit).then(() => {
       navigate('/note')
     })
   }
@@ -39,7 +39,7 @@ export function NoteEdit() {
 
   return (
     <section className="note-filter">
-      <h2>{noteToEdit.id ? 'Edit' : 'Add'} Note</h2>
+      <h2>{noteToEdit.id ? 'Edit' : 'Add'} Edit</h2>
       <form onSubmit={onSaveNote}>
         <label htmlFor="txt">Note text:</label>
         <input
