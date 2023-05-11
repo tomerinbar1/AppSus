@@ -1,5 +1,6 @@
 .mail-app{
     padding: 0 20px;
+    height: calc(100vh - 70px);
 }
 
 .right-side{

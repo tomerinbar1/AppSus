@@ -4,5 +4,12 @@
   --email-list-color: #ffffff;
   --main-filter-hover-color: #d3e3fd;
   --search-bar-color: #eaf1fb;
+  --border-line-color: #eceff1;
+  --compose-head-color: #f2f6fc;
+  --send-btn-color: #1b61d1;
+  --send-btn-text-color: #f3f7fd;
+  --new-message-color: #041e49;
+  --compose-btn-color: #c2e7ff;
+  --compose-btn-text-color: #001d35;
   /* Google Keeper */
 }

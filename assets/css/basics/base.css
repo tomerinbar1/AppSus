@@ -5,6 +5,7 @@ body {
   width: 100vw;
   background-color: var(--main-app-color);
   overflow-y: hidden;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
 }
 
 h1,

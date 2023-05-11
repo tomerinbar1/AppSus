@@ -1,4 +1,9 @@
-export const MailPreview = ({ mail }) => {
+import { MailExpand } from './MailExpand.jsx'
 
-    return <li>{mail.subject}</li>
+export const MailPreview = ({ mail }) => {
+  return (
+    <li>
+      {mail.subject} <MailExpand mail={mail} />
+    </li>
+  )
 }

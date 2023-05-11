@@ -15,7 +15,7 @@ const sendMail = (ev) => {
     <section className="mail-compose">
        
         <div className="mail-compose-modal">
-        <div className='flex space-between'>
+        <div className='flex space-between compose-head'>
             <span>New Message</span>
             <span onClick={()=>onToggleModal() }>X</span>
         </div>
@@ -39,13 +39,12 @@ const sendMail = (ev) => {
             </div>
             <div className='mail-compose-body'>
               <textarea
-                placeholder="Message"
                 value={mail.body}
                 onChange={ev => setMail({ ...mail, body: ev.target.value })}
               ></textarea>
             </div>
             <div className='actions'>
-                <button type='submit'>Sent</button>
+                <button className="send-btn" type='submit'>Send</button>
             </div>
           </form>
         </div>

@@ -40,7 +40,7 @@ export const MailIndex = () => {
       <div className="left-side flex column main-filter">
         <MailMenu onToggleModal={onToggleModal} />
       </div>
-      <div className="right-side mail-list">
+      <div className="right-side mail-list flex column">
         <MailList mails={mails} />
       </div>
     </section>

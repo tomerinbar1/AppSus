@@ -1,16 +1,19 @@
+import { MenuItem } from './MenuItem.jsx'
+import { getEmailMenu } from '../services/mailUtil.js'
 
-const { useEffect, useState } = React
-import { MenuItem } from "./MenuItem.jsx"
-import { getEmailMenu } from "../services/MailUtil.js"
+export const MailMenu = ({ onToggleModal }) => {
+  const menuItems = getEmailMenu()
 
-
-export const MailMenu = ({onToggleModal}) => {
-const menuItems = getEmailMenu()
-
-    return (
-        <section className="mail-menu flex column">
-              <button onClick={() => onToggleModal()}>Compose</button>
-            {menuItems.map(item => <MenuItem key={item.title} item={item} />)}
-        </section>
-    )
+  return (
+    <section className="mail-menu flex column">
+      <button className="compose-btn" onClick={() => onToggleModal()}>
+        Compose
+      </button>
+      {menuItems.map(item => (
+        <MenuItem key={item.title} item={item}>
+          <img src={item.icon} alt={''} />
+        </MenuItem>
+      ))}
+    </section>
+  )
 }
