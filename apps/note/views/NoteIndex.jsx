@@ -54,28 +54,3 @@ export function NoteIndex() {
     )
 }
 
-// export function NoteIndex(){
-
-//     useEffect(() => {
-//         loadNotes()
-//       }, [])
-
-//       function loadNotes() {
-//         noteService.query(filterBy).then(notes => setBooks(notes))
-//       }
-
-//     const [notes, setNotes] = useState([])
-
-//     return (
-//         <section className="note-index">
-//           {/* <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} /> */}
-//           <button className="button button--green">
-//             <Link to="/note/edit">Edit Note</Link>
-//           </button>
-//           <button className="button button--green">
-//             <Link to="/note/add">Add Note</Link>
-//           </button>
-//           <NoteList />
-//         </section>
-//       )
-// }

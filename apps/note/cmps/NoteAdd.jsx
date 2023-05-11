@@ -1,11 +1,12 @@
 const { useEffect, useState } = React
 const {useNavigate}= ReactRouterDOM
-import { noteService } from "../services/NoteService"
+import { noteService } from "../services/NoteService.js"
 
 
 export function NoteAdd({notes,setNotes}){
 const [noteToAdd,setNoteToAdd] = useState(noteService.createNote())
 const navigate = useNavigate()
+
 function handleChange({ target }) {
     const field = target.name
     const value = target.type === 'number' ? +target.value || '' : target.value
