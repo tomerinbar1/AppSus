@@ -1,4 +1,33 @@
  /* note index */
+ * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: sans-serif;
+  }
+
+
+  body {
+    background: #ffffff;
+  }
+
+
+/*   
+  .note-index input {
+    width: 100%;
+    border: none;
+    padding: 4px 10px;
+    margin-bottom: 20px;
+    outline: none;
+    font-size: 1rem;
+    resize: none;
+  }
+
+  
+
 
  .note-index {
     display: flex;
@@ -9,4 +38,4 @@
  .note-index li{
     flex-direction: column;
     align-content: space-around;
- }
+ } */

@@ -4,8 +4,9 @@ export const NotePreview = ({ note, onDeleNote }) => {
     onDeleNote(note.id)
   }
   return (
-    <li>
-      {note.id}
+    <li className="note">
+      <h1>{note.title}</h1> 
+      <p>{note.info.txt}</p>
       <button onClick={onHandleClick}>X</button>
     </li>
   )

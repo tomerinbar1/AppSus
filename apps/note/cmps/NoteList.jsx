@@ -4,7 +4,7 @@ import { NotePreview } from './NotePreview.jsx'
 
 export function NoteList({ notes, onDeleNote }) {
   return (
-    <ul className="note-list flex wrap">
+    <ul className="note-list">
       {notes.map(note => (
         <NotePreview onDeleNote={onDeleNote} note={note} key={note.id} />
       ))}
