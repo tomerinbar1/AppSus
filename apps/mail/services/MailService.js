@@ -22,8 +22,11 @@ const gMails = [
     isRead: false,
     sentAt: 1551133930594,
     removedAt: null,
-    from: 'momo@momo.com',
-    to: ['user1@appsus.com', 'user2@appsus.com'],
+    from: { email: 'momo@momo.com', name: 'Flight Cycle' },
+    to: [
+      { email: 'user1@appsus.com', name: 'John Doe' },
+      { email: 'user2@appsus.com', name: 'Jane Doe' },
+    ],
   },
   {
     id: 'e102',
@@ -32,8 +35,8 @@ const gMails = [
     isRead: true,
     sentAt: 1652223600000,
     removedAt: null,
-    from: 'jane@acme.com',
-    to: ['tomerinbar1@gmail.com'],
+    from: { email: 'jane@acme.com', name: 'ACME Corporation' },
+    to: [{ email: 'tomerinbar1@gmail.com', name: 'Tomer Inbar' }],
   },
   {
     id: 'e103',
@@ -42,8 +45,8 @@ const gMails = [
     isRead: false,
     sentAt: 1652200800000,
     removedAt: null,
-    from: 'marketing@company.com',
-    to: ['tomerinbar1@gmail.com'],
+    from: { email: 'marketing@company.com', name: 'Company Inc.' },
+    to: [{ email: 'tomerinbar1@gmail.com', name: 'Tomer Inbar' }],
   },
   {
     id: 'e104',
@@ -52,8 +55,11 @@ const gMails = [
     isRead: true,
     sentAt: 1652167200000,
     removedAt: null,
-    from: 'joe@example.com',
-    to: ['tomerinbar1@gmail.com', 'user1@appsus.com'],
+    from: { email: 'joe@example.com', name: 'Example Inc.' },
+    to: [
+      { email: 'tomerinbar1@gmail.com', name: 'Tomer Inbar' },
+      { email: 'user1@appsus.com', name: 'John Doe' },
+    ],
   },
   {
     id: 'e105',
@@ -62,8 +68,11 @@ const gMails = [
     isRead: false,
     sentAt: 1652148000000,
     removedAt: null,
-    from: 'support@company.com',
-    to: ['tomerinbar1@gmail.com', 'user2@appsus.com'],
+    from: { email: 'support@company.com', name: 'Company Support' },
+    to: [
+      { email: 'tomerinbar1@gmail.com', name: 'Tomer Inbar' },
+      { email: 'user2@appsus.com', name: 'Jane Doe' },
+    ],
   },
   {
     id: 'e106',
@@ -72,8 +81,11 @@ const gMails = [
     isRead: false,
     sentAt: 1652054400000,
     removedAt: null,
-    from: 'jenny@example.com',
-    to: ['tomerinbar1@gmail.com', 'user3@appsus.com'],
+    from: { email: 'jenny@example.com', name: 'Example Inc.' },
+    to: [
+      { email: 'tomerinbar1@gmail.com', name: 'Tomer Inbar' },
+      { email: 'user3@appsus.com', name: 'Bob Smith' },
+    ],
   },
 ]
 
@@ -109,7 +121,7 @@ function createEmail() {
     sentAt: Date.now(),
     removedAt: null,
     from: logginUser,
-    to: [],
+    to: [{}],
   }
 }
 
