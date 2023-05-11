@@ -1,5 +1,5 @@
 import { MailPreview } from './MailPreview.jsx'
-import { mailService } from '../services/mail.service.js'
+import { mailService } from '../services/mailService.js'
 
 export function MailList({ mails }) {
   function onRemoveEmail(mailId) {
