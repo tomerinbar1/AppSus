@@ -1,6 +1,6 @@
 const { useEffect, useState } = React
 
-import { MailService } from '../services/MailService.js'
+import { MailService } from '../services/mailService.js'
 
 export const MailCompose = ({isModalOpen,onSendMail,onToggleModal}) => {
   const [mail, setMail] = useState(MailService.createEmail())

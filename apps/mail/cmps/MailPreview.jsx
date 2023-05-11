@@ -1,7 +1,8 @@
-export const MailPreview = ({ mail, onDeleteMail }) => {
+export const MailPreview = ({ mail, onRemoveEmail }) => {
   return (
-    <li onClick={() => onDeleteMail(mail.id)}>
+    <li className="flex space-between" >
       <span>{mail.subject}</span>
+      <span onClick={() => onRemoveEmail(mail.id)}>x</span>
     </li>
   )
 }

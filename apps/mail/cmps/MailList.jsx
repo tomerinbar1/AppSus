@@ -1,9 +1,19 @@
 import { MailPreview } from './MailPreview.jsx'
-import { mailService } from '../services/mailService.js'
+import { MailService } from '../services/mailService.js'
 
-export function MailList({ mails }) {
-  function onRemoveEmail(mailId) {
-    mailService.removeEmail(mailId)
+
+export const MailList = ({ mails }) => {
+  
+  const onRemoveEmail = mailId => {
+    console.log('mailId', mailId);
+    MailService
+      .removeEmail(mailId)
+      .then(() => {
+        console.log('Mail removed successfully')
+      })
+      .catch(err => {
+        console.error('Error removing mail', err)
+      })
   }
 
   return (

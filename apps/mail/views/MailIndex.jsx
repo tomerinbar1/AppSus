@@ -1,6 +1,6 @@
 const { useEffect, useState } = React
 
-import { MailService } from '../services/MailService.js'
+import { MailService } from '../services/mailService.js'
 import { MailList } from '../cmps/MailList.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'

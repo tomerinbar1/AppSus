@@ -2,7 +2,7 @@
 export const MenuItem = ({ item }) => {
     return (
         <div className="menu-item">
-            <i className="material-icons">{item.icon}</i>
+            <div className="menu-icon">{item.icon}</div>
             <span>{item.title}</span>
         </div>
     )
