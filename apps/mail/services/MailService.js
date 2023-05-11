@@ -1,5 +1,5 @@
-import { asyncStorage } from "../../../services/AsyncStorageService.js"
-import {storageService} from '../../../services/StorageService.js'
+import { asyncStorage } from '../../../services/AsyncStorageService.js'
+import { storageService } from '../../../services/StorageService.js'
 
 export const MailService = {
   getEmails,
@@ -23,7 +23,7 @@ const gMails = [
     sentAt: 1551133930594,
     removedAt: null,
     from: 'momo@momo.com',
-    to: ['user1@appsus.com', 'user2@appsus.com', ],
+    to: ['user1@appsus.com', 'user2@appsus.com'],
   },
   {
     id: 'e102',
@@ -75,8 +75,7 @@ const gMails = [
     from: 'jenny@example.com',
     to: ['tomerinbar1@gmail.com', 'user3@appsus.com'],
   },
-];
-
+]
 
 _createEmails()
 

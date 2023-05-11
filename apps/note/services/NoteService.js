@@ -2,6 +2,7 @@
 import { asyncStorage } from '../../../services/asyncStorageService.js'
 import { utilService } from '../../../services/utilService.js'
 import { storageService } from '../../../services/storageService.js'
+
 const NOTE_KEY = 'noteDB'
 
 const gNotes = [

@@ -1,9 +1,7 @@
-import { MailExpand } from './MailExpand.jsx'
-
-export const MailPreview = ({ mail }) => {
+export const MailPreview = ({ mail, onDeleteMail }) => {
   return (
-    <li>
-      {mail.subject} <MailExpand mail={mail} />
+    <li onClick={() => onDeleteMail(mail.id)}>
+      <span>{mail.subject}</span>
     </li>
   )
 }
