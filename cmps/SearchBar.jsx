@@ -1,20 +1,19 @@
-const { useState } = React
+const { useNavigate, } = ReactRouterDOM
+const { useState} = React
 
-export const SearchBar = () => {
+export function SearchBar() {
+const navigate = useNavigate()
 
-  const [searchStr, setSearchStr] = useState('')
-
-  const handleChange = ({ target }) => {
-    const value = target.value
-    setSearchStr(value)
-  }
+const handleChange = ev => {
+  const { value } = ev.target
+navigate({ search: `${value}`}) 
+}
 
   return (
     <div className="search-bar">
       <input
         type="text"
         name="searchStr"
-        value={searchStr}
         onChange={handleChange}
         placeholder="Search"
       />

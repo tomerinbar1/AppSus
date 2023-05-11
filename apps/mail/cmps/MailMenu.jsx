@@ -11,7 +11,6 @@ export const MailMenu = ({ onToggleModal }) => {
       </button>
       {menuItems.map(item => (
         <MenuItem key={item.title} item={item}>
-          <img src={item.icon} alt={''} />
         </MenuItem>
       ))}
     </section>

@@ -1,3 +1,4 @@
-.menu-item{
-    margin-block: 0.7rem;
+.menu-item {
+  cursor: pointer;
+  justify-content: space-between;
 }

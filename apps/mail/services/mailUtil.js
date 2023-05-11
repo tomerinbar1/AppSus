@@ -4,15 +4,15 @@ export function getEmailMenu(){
     return  [
         {
             title: 'Inbox',
-            icon: '/path/assets/img/Gmail/inbox.png',
+            icon: 'assets/img/Gmail/inbox.png',
         },
         {
             title: 'Starred',
-            icon: '/path/assets/img/Gmail/star.png',
+            icon: 'assets/img/Gmail/star.png',
         },
         {
             title: 'Sent',
-            icon: '/path/assets/img/Gmail/sent.png',
+            icon: 'assets/img/Gmail/sent.png',
         },
 
     ]
