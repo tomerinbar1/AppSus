@@ -1,1 +1,13 @@
  /* note list */
+
+ .note-list .flex{
+    width: 60vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 15%;
+ }
+
+ .flex{
+    flex-direction: row;
+    flex-wrap: wrap;
+ }

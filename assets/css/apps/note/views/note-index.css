@@ -1,1 +1,12 @@
  /* note index */
+
+ .note-index {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow:column;
+ }
+
+ .note-index li{
+    flex-direction: column;
+    align-content: space-around;
+ }

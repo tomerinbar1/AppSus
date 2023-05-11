@@ -38,18 +38,14 @@ export function NoteIndex() {
         <section className="note-index">
             {/* <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} /> */}
             {/* <CreateNote /> */}
-            <button className="button button--green">
-                <Link to="/note/edit">Edit Note</Link>
-            </button>
-            <button className="button button--green">
-                <Link to="/note/add">Add Note</Link>
-            </button>
-            <NoteList onDeleNote={onDeleNote} notes={notes} />{' '}
-            {/* Pass the notes prop here */}
             <div className="add-note">
                 <NoteAdd notes={notes} setNotes={setNotes} />
 
             </div>
+            
+            <NoteList onDeleNote={onDeleNote} notes={notes} />{' '}
+            {/* Pass the notes prop here */}
+            
         </section>
     )
 }
