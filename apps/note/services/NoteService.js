@@ -1,7 +1,7 @@
 // note service
-import { asyncStorage } from '../../../services/asyncStorageService.js'
-import { utilService } from '../../../services/utilService.js'
 import { storageService } from '../../../services/storageService.js'
+import { asyncStorage } from '../../../services/asyncStorageService.js'
+// import { utilService } from '../../../services/utilService.js'
 const NOTE_KEY = 'noteDB'
 
 const gNotes = [
@@ -170,42 +170,34 @@ export const noteService = {
 function getEmptyNote(txt = '') {
     return {
         txt,
-        type: 'NoteTxt',
+        type: 'NoteTxt'
     }
 }
 
-
-
 function createNote() {
     return {
-        id: utilService.makeId(),
+        title :'New note',
         createdAt: Date.now(),
         type: 'NoteTxt',
         isPinned: true,
         style: { backgroundColor: '#00d' },
         info: { txt: 'Fullstack Me Baby!' }
-
     }
 }
-// function createNote(type = 'NoteTxt', txt) {
-//   const note = getEmptyNote(type, txt)
-//   note.id = utilService.makeId()
-//   return note
-// }
 
-function getNotes() {
+async function getNotes() {
     return asyncStorage.query(NOTE_KEY).then(notes => {
         return notes
     })
 }
 
-function getNote(noteId) {
+async function getNote(noteId) {
     return asyncStorage.get(NOTE_KEY, noteId)
 }
-function removeNote(noteId) {
+async function removeNote(noteId) {
     return asyncStorage.remove(NOTE_KEY, noteId)
 }
-function saveNote(note) {
+async function saveNote(note) {
     if (note.id) {
         return asyncStorage.put(NOTE_KEY, note)
     } else {

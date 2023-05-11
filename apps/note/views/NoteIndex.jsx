@@ -47,7 +47,7 @@ export function NoteIndex() {
             <NoteList onDeleNote={onDeleNote} notes={notes} />{' '}
             {/* Pass the notes prop here */}
             <div className="add-note">
-                <NoteAdd />
+                <NoteAdd notes={notes} setNotes={setNotes} />
 
             </div>
         </section>
