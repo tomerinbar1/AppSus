@@ -1,5 +1,22 @@
  /* note list */
 
+
+.note-list-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row;
+  margin: auto;
+  align-content: center;
+  background-color: #c8c4c5;
+  width: 80vw;
+}
+
+.note-list{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
  .note-list li {
     background: #ffffff;
     width: 240px;
@@ -30,7 +47,7 @@
   
   .note p {
     font-size: 1.125rem;
-    color: #6f212b;
+    
     margin-bottom: 10px;
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -44,4 +61,8 @@
     background: none;
     cursor: pointer;
     outline: none;
+  }
+
+  .note-img{
+    width:100%;
   }

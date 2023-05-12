@@ -1,0 +1,15 @@
+
+.checkbox-input ul{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+  }
+
+  .checkbox-input li{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row;
+    width:min-content;
+    height: fit-content;
+    font-size: 0.85rem;
+  }
