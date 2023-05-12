@@ -14,11 +14,13 @@ export function NoteIndex() {
         loadNotes()
     }, [])
 
+    function onEditNote(note) {
+        console.log('Edit note function')
+        noteService
+            .saveNote(note)
+            .then(loadNotes)
 
-
-    // function onAddNote(value) {
-    //     noteService.save(value).then(noteService.getEmptyNote(value))
-    // }
+    }
 
     function onDeleNote(noteId) {
         console.log('noteId', noteId)
@@ -30,9 +32,12 @@ export function NoteIndex() {
                 setNotes(updatedNotes)
             })
     }
+
+
+
     function loadNotes() {
         noteService.getNotes()
-        .then(note => setNotes(note))
+            .then(note => setNotes(note))
     }
     return (
         <section className="note-index">
@@ -40,12 +45,11 @@ export function NoteIndex() {
             {/* <CreateNote /> */}
             <div className="add-note">
                 <NoteAdd notes={notes} setNotes={setNotes} />
-
             </div>
             
-            <NoteList onDeleNote={onDeleNote} notes={notes} />{' '}
+            <NoteList onDeleNote={onDeleNote} onEditNote={onEditNote} notes={notes} />{' '}
             {/* Pass the notes prop here */}
-            
+           
         </section>
     )
 }

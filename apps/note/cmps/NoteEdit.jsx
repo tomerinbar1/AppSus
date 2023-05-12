@@ -3,18 +3,19 @@ const { useParams, useNavigate } = ReactRouterDOM
 
 import { noteService } from '../services/NoteService.js'
 
-export function NoteEdit() {
+export function NoteEdit(note) {
   const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
   const navigate = useNavigate()
-  const params = useParams()
+  // const params = useParams()
+  
 
   useEffect(() => {
-    if (params.noteId) loadNote()
+    if (note.Id) loadNote()
   }, [])
 
   function loadNote() {
     noteService
-      .get(params.noteId)
+      .get(note.Id)
       .then(setNoteToEdit)
       .catch(err => {
         console.log("Couldn't edit the note", err)
@@ -47,7 +48,7 @@ export function NoteEdit() {
           onChange={handleChange}
           name="txt"
           id="txt"
-          type="text"
+          type={type}
           placeholder="Enter note"
         />
 

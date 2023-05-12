@@ -19,18 +19,11 @@ const gNotes = [
         createdAt: 1652191330000,
         isPinned: false,
         info: { url: 'https://picsum.photos/200', title: 'Random image' },
-        style: { backgroundColor: '#fff9c4' },
+        style: { backgroundColor: '#fff9c4' }
     },
+
     {
         id: 'n003',
-        type: 'NoteTxt',
-        createdAt: 1652191340000,
-        isPinned: true,
-        info: { txt: 'Call mom for her birthday' },
-        style: { backgroundColor: '#ffab91' },
-    },
-    {
-        id: 'n004',
         type: 'NoteTodos',
         createdAt: 1652191350000,
         isPinned: false,
@@ -45,7 +38,7 @@ const gNotes = [
         style: { backgroundColor: '#b2ebf2' },
     },
     {
-        id: 'n005',
+        id: 'n004',
         type: 'NoteImg',
         createdAt: 1652191360000,
         isPinned: true,
@@ -53,7 +46,7 @@ const gNotes = [
         style: { backgroundColor: '#d7ccc8' },
     },
     {
-        id: 'n006',
+        id: 'n005',
         type: 'NoteTxt',
         createdAt: 1652191370000,
         isPinned: false,
@@ -61,7 +54,7 @@ const gNotes = [
         style: { backgroundColor: '#ffe082' },
     },
     {
-        id: 'n007',
+        id: 'n006',
         type: 'NoteTodos',
         createdAt: 1652191380000,
         isPinned: true,
@@ -75,85 +68,8 @@ const gNotes = [
             ],
         },
         style: { backgroundColor: '#c8e6c9' },
-    },
-    {
-        id: 'n008',
-        type: 'NoteImg',
-        createdAt: 1652191390000,
-        isPinned: false,
-        info: {
-            url: 'https://picsum.photos/400',
-            title: 'Yet another random image',
-        },
-        style: { backgroundColor: '#ffe0b2' },
-    },
-    {
-        id: 'n009',
-        type: 'NoteTxt',
-        createdAt: 1652191400000,
-        isPinned: true,
-        info: { txt: 'Write blog post about React hooks' },
-        style: { backgroundColor: '#ef9a9a' },
-    },
+    }
 
-    {
-        id: 'n011',
-        type: 'NoteTodos',
-        createdAt: 1652191420000,
-        isPinned: false,
-        info: {
-            title: 'Household chores',
-            todos: [
-                { txt: 'Do laundry', doneAt: 1652200000000 },
-                { txt: 'Clean bathroom', doneAt: null },
-                { txt: 'Vacuum living room', doneAt: null },
-                { txt: 'Take out trash', doneAt: 1652210000000 },
-            ],
-        },
-        style: { backgroundColor: '#c5cae9' },
-    },
-    {
-        id: 'n012',
-        type: 'NoteTxt',
-        createdAt: 1652191430000,
-        isPinned: true,
-        info: { txt: 'Research new laptop models' },
-        style: { backgroundColor: '#b3e5fc' },
-    },
-    {
-        id: 'n013',
-        type: 'NoteImg',
-        createdAt: 1652191440000,
-        isPinned: false,
-        info: {
-            url: 'https://picsum.photos/500',
-            title: 'Yet another random image',
-        },
-        style: { backgroundColor: '#dcedc8' },
-    },
-    {
-        id: 'n014',
-        type: 'NoteTxt',
-        createdAt: 1652191450000,
-        isPinned: true,
-        info: { txt: 'Practice piano for 30 minutes' },
-        style: { backgroundColor: '#ffe0b2' },
-    },
-    {
-        id: 'n015',
-        type: 'NoteTodos',
-        createdAt: 1652191460000,
-        isPinned: false,
-        info: {
-            title: 'Gift ideas',
-            todos: [
-                { txt: 'Buy flowers for mom', doneAt: null },
-                { txt: 'Get birthday present for friend', doneAt: null },
-                { txt: 'Find anniversary gift for spouse', doneAt: null },
-            ],
-        },
-        style: { backgroundColor: '#f0f4c3' },
-    },
 ]
 
 createNotes()
@@ -165,6 +81,7 @@ export const noteService = {
     saveNote,
     createNote,
     getEmptyNote,
+    // extractVideoIdFromURL
 }
 
 function getEmptyNote(txt = '') {
@@ -174,13 +91,20 @@ function getEmptyNote(txt = '') {
     }
 }
 
+// function extractVideoIdFromURL(url) {
+//     const urlParams = new URLSearchParams(new URL(url).search)
+//     const newVideoId = urlParams.get('v')
+//     if (!newVideoId) return url
+//     else return newVideoId
+//   }
+
 function createNote() {
     return {
-        title :'New note',
+        title :'Title',
         createdAt: Date.now(),
-        type: 'NoteTxt',
+        type: 'Text',
         isPinned: true,
-        style: { backgroundColor: '#00d' },
+        style: { backgroundColor: 'white' },
         info: { txt: 'Fullstack Me Baby!' }
     }
 }

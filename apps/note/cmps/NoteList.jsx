@@ -4,26 +4,22 @@ import { NotePreview } from './NotePreview.jsx'
 
 export function NoteList({ notes, onDeleNote }) {
   return (
-    <ul className="note-list">
-      {notes.map(note => (
-        <NotePreview onDeleNote={onDeleNote} note={note} key={note.id} />
-      ))}
-    </ul>
+    <div className="note-list-container">
+      <ul className="pinned">
+      {/* {notes.map((note) => {
+          if (note && note.isPinned) {
+            return <NotePreview onDeleNote={onDeleNote} note={note} key={note.id} />;
+          }
+          return null;
+        })} */}
+      </ul>
+      <ul className="note-list">
+        {notes.map(note => (
+          <NotePreview onDeleNote={onDeleNote} note={note} key={note.id} />
+
+        ))}
+      </ul>
+    </div>
   )
 }
 
-/* <button className="button button--blue">
-           <Link to={`/note/${note.id}`}>Select Note</Link>
-         </button>
-
-         <button
-           className="button button--red"
-           onClick={() => onRemoveNote(note.id)}
-         >
-           Remove Note
-         </button>
-         <button className="button button--yellow">
-           <Link to={`/note/edit/${note.id}`}>Edit</Link>
-         </button>
-
-         */
