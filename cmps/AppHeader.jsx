@@ -4,8 +4,6 @@ import { SearchBar } from './SearchBar.jsx'
 
 export function AppHeader() {
   const location = useLocation()
-  const renderSearchBar =
-    location.pathname === '/mail' || location.pathname === '/note'
   const renderGmailLogo = location.pathname === '/mail'
   const renderKeepLogo = location.pathname === '/note'
 

@@ -1,4 +1,9 @@
-.menu-item {
-  cursor: pointer;
-  justify-content: space-between;
+.menu-nav a {
+  display: flex;
+  margin-block-end: 20px;
+  align-items: end;
+}
+
+.menu-nav img {
+  margin-inline-end: 15px;
 }

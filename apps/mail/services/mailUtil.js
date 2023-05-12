@@ -14,6 +14,10 @@ export function getEmailMenu(){
             title: 'Sent',
             icon: 'assets/img/Gmail/sent.png',
         },
+        {
+            title: 'Draft',
+            icon: 'assets/img/Gmail/draft.png',
+        },
 
     ]
 }

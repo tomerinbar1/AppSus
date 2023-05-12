@@ -1,13 +1,16 @@
-const { useNavigate, } = ReactRouterDOM
-const { useState} = React
+const { useNavigate } = ReactRouterDOM
 
-export function SearchBar() {
-const navigate = useNavigate()
+export const SearchBar = () => {
+  const navigate = useNavigate()
 
-const handleChange = ev => {
-  const { value } = ev.target
-navigate({ search: `${value}`}) 
-}
+  const handleChange = ev => {
+    // ev is the event object
+    const { value } = ev.target
+    // extract the value from the event object
+    navigate({ search: `${value}` })
+    // navigate to the search value
+    if (value === '') navigate('/mail')
+  }
 
   return (
     <div className="search-bar">

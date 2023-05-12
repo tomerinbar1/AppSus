@@ -5,23 +5,26 @@ import { MailService } from '../services/mailService.js'
 import { MailList } from '../cmps/MailList.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'
+import { MailFilter } from '../cmps/MailFilter.jsx'
 // import { MailExpand } from '../cmps/MailExpand.jsx'
 
 export const MailIndex = () => {
   const [mails, setMails] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedMail, setSelectedMail] = useState(null)
+  const [isRead, setIsRead] = useState('all')
   const location = useLocation()
-  const {search} = location
+  const { search } = location
   const txt = search.slice(1)
 
   useEffect(() => {
     loadMails()
-  }, [txt])
+  }, [txt, isRead])
 
   const loadMails = () => {
-    const filterBy = { txt,isRead: false }
+    const filterBy = { txt, isRead}
     MailService.getEmails(filterBy).then(mails => setMails(mails))
+    //
   }
 
   const onRemoveEmail = mailId => {
@@ -34,7 +37,6 @@ export const MailIndex = () => {
         console.error('Error removing mail', err)
       })
   }
-
 
   const onToggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -51,6 +53,10 @@ export const MailIndex = () => {
     setSelectedMail(mailId)
   }
 
+  const readFilter = (value) => {
+    setIsRead(value)
+  }
+
   return (
     <section className="mail-app flex">
       <MailCompose
@@ -62,6 +68,7 @@ export const MailIndex = () => {
         <MailMenu onToggleModal={onToggleModal} />
       </div>
       <div className="right-side mail-list flex column">
+        <MailFilter readFilter={readFilter} />
         <MailList
           mails={mails}
           onRemoveEmail={onRemoveEmail}

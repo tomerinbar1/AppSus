@@ -84,9 +84,13 @@ async function getEmails(filterBy) {
   return asyncStorage.query(MAIL_KEY).then(mails => {
     return mails.filter(mail => {
       const { txt, isRead } = filterBy
-      const isSubjectMatch = mail.subject
-        .toLowerCase()
-        .startsWith(txt.toLowerCase())
+
+      if (isRead === 'read' && !mail.isRead) {
+        return false
+      } else if (isRead === 'unread' && mail.isRead) {
+        return false
+      }
+      const isSubjectMatch = mail.subject.includes(txt.toLowerCase())
       return isSubjectMatch
     })
   })

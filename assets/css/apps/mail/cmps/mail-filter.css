@@ -1,0 +1,9 @@
+.mail-filter select {
+  margin: 20px 10px 0;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 0.8em;
+  text-align: center;
+  padding: 10px 20px;
+  max-width: fit-content;
+}

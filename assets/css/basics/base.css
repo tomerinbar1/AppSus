@@ -20,5 +20,20 @@ a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  background-repeat: no-repeat;
 }
 
+img{
+  margin: 0;
+  padding: 0;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
