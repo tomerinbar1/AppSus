@@ -1,12 +1,15 @@
-const { useState } = React
+const { useNavigate } = ReactRouterDOM
 
 export const SearchBar = () => {
+  const navigate = useNavigate()
 
-  const [searchStr, setSearchStr] = useState('')
-
-  const handleChange = ({ target }) => {
-    const value = target.value
-    setSearchStr(value)
+  const handleChange = ev => {
+    // ev is the event object
+    const { value } = ev.target
+    // extract the value from the event object
+    navigate({ search: `${value}` })
+    // navigate to the search value
+    if (value === '') navigate('/mail')
   }
 
   return (
@@ -14,7 +17,6 @@ export const SearchBar = () => {
       <input
         type="text"
         name="searchStr"
-        value={searchStr}
         onChange={handleChange}
         placeholder="Search"
       />
