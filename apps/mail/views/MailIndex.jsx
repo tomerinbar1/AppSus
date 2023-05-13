@@ -12,7 +12,7 @@ export const MailIndex = () => {
   const [mails, setMails] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedMail, setSelectedMail] = useState(null)
-  const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+  const [filterBy, setFilterBy] = useState({ isStar: null, isRead: null, txt: '' })
 
   const location = useLocation()
   const params = useParams()

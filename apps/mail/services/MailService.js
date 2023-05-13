@@ -8,7 +8,6 @@ export const mailService = {
   createEmail,
   saveEmail,
   updateEmail,
-  getDefaultFilter,
 }
 
 const logginUser = { email: 'tomerinbar1@gmail.com', fullName: 'Tomer Inbar' }
@@ -200,8 +199,4 @@ function _createEmails() {
     mails = gMails
     storageService.saveToStorage(MAIL_KEY, mails)
   }
-}
-
-function getDefaultFilter() {
-  return { isStar: null, isRead: null, txt: '' }
 }
