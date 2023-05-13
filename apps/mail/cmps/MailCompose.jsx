@@ -1,9 +1,9 @@
-const { useEffect, useState } = React
+const { useState } = React
 
 import { mailService } from '../services/mailService.js'
 
 export const MailCompose = ({ isModalOpen, onSendMail, onToggleModal }) => {
-  const [mail, setMail] = useState(mailService.createEmail())
+  const [mail, setMail] = useState(null)
 
   const sendMail = ev => {
     ev.preventDefault()
