@@ -1,4 +1,11 @@
-export const MailButtons = ({ onRemoveEmail, onToggleRead, mail }) => {
+
+const bin = '../../../assets/img/Gmail/bin.png'
+const read = '../../../assets/img/Gmail/read.png'
+
+
+
+export const 
+MailButtons = ({ onRemoveEmail, onToggleRead, mail }) => {
   const removeEmail = (ev, mailId) => {
     ev.stopPropagation()
     onRemoveEmail(mailId)
@@ -9,9 +16,9 @@ export const MailButtons = ({ onRemoveEmail, onToggleRead, mail }) => {
     onToggleRead(mail)
   }
   return (
-    <div className="flex">
-      <div onClick={ev => removeEmail(ev, mail.id)}>X</div>
-      <div onClick={ev => toggleRead(ev, mail)}>R</div>
+    <div className="flex email-hover-icons align-center">
+      <div onClick={ev => removeEmail(ev, mail.id)}><img src={bin} alt="Bin" /></div>
+      <div onClick={ev => toggleRead(ev, mail)}><img src={read} alt="Read" /></div>
     </div>
   )
 }

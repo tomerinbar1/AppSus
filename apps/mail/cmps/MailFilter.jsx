@@ -1,8 +1,8 @@
-export const MailFilter = ({ readFilter }) => {
+export const MailFilter = ({ onHandleReadClick }) => {
   
   const handleChange = ev => {
     const { value } = ev.target
-    readFilter(value)
+    onHandleReadClick(value)
   }
 
   return (

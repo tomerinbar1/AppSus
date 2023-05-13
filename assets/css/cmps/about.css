@@ -1,0 +1,19 @@
+.about {
+    background-image: url('../../img/wallpaper.jpg');
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+    padding: 60px;
+  }
+  
+  .about h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .about p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #555;
+  }
+  
