@@ -8,6 +8,14 @@
   margin-block-end: 20px;
   align-items: end;
   cursor: pointer;
+  padding: 5px;
+}
+
+.menu-nav > *:hover {
+  background-color: #eaebef;
+  border-radius: 1em;
+  transition: all 0.2s ease-in-out;
+  padding: 5px;
 }
 
 .count {

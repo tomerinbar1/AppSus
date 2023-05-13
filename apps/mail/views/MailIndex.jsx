@@ -11,9 +11,8 @@ import { MailDetails } from './MailDetails.jsx'
 export const MailIndex = () => {
   const [mails, setMails] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isRead, setIsRead] = useState('all')
   const [selectedMail, setSelectedMail] = useState(null)
-  const [menuStatus, setMenuStatus] = useState('inbox')
+  const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
 
   const location = useLocation()
   const params = useParams()
@@ -22,8 +21,13 @@ export const MailIndex = () => {
   const txt = search.slice(1)
 
   useEffect(() => {
+    onHandleSearch(txt)
     loadMails()
-  }, [txt, isRead, menuStatus])
+  }, [txt])
+
+  useEffect(() => {
+    loadMails()
+  }, [filterBy])
 
   useEffect(() => {
     if (mailId) {
@@ -37,7 +41,6 @@ export const MailIndex = () => {
   }, [mailId])
 
   const loadMails = () => {
-    const filterBy = { txt, isRead, menuStatus }
     mailService.getEmails(filterBy).then(mails => setMails(mails))
   }
 
@@ -79,13 +82,19 @@ export const MailIndex = () => {
     setSelectedMail(mailId)
   }
 
-  const readFilter = value => {
-    setIsRead(value)
+  const onHandleMenuClick = status => {
+    setFilterBy(prevFilterBy => ({ ...prevFilterBy, status }))
   }
 
-  const onMenuClick = status => {
-    mailService.getEmails(status).then(mails => setMails(mails))
-    setMenuStatus(status)
+  const onHandleReadClick = isRead => {
+    setFilterBy(prevFilterBy => ({ ...prevFilterBy, isRead }))
+  }
+
+  const onHandleSearch = txt => {
+    setFilterBy(prevFilterBy => ({
+      ...prevFilterBy,
+      txt: txt,
+    }))
   }
 
   return (
@@ -98,7 +107,7 @@ export const MailIndex = () => {
       <div className="left-side flex column main-filter">
         <MailMenu
           onToggleModal={onToggleModal}
-          onMenuClick={onMenuClick}
+          onHandleMenuClick={onHandleMenuClick}
           mails={mails}
         />
       </div>
@@ -106,7 +115,7 @@ export const MailIndex = () => {
         {selectedMail && <MailDetails mail={selectedMail} />}
         {!mailId && (
           <div>
-            <MailFilter readFilter={readFilter} />
+            <MailFilter onHandleReadClick={onHandleReadClick} />
             <MailList
               mails={mails}
               onRemoveEmail={onRemoveEmail}

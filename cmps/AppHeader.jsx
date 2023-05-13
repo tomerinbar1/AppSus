@@ -1,4 +1,4 @@
-const { Link, NavLink, useLocation } = ReactRouterDOM
+const { NavLink, useLocation } = ReactRouterDOM
 
 import { SearchBar } from './SearchBar.jsx'
 
@@ -16,12 +16,12 @@ export function AppHeader() {
           <span className="keep-logo-text">Keep</span>
         </div>
       )}
-      <SearchBar  />
+      <SearchBar />
       <nav>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/about">About</NavLink>
         <NavLink to="/mail">Mail</NavLink>
         <NavLink to="/note">Note</NavLink>
+        <NavLink to="/about">About</NavLink>
       </nav>
     </header>
   )

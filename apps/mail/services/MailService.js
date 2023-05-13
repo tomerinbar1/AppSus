@@ -18,96 +18,107 @@ const MAIL_KEY = 'mailsDB'
 const gMails = [
   {
     id: 'e101',
-    subject: 'Miss you!',
-    body: 'Would love to catch up sometimes',
+    subject:
+      'Notification: התייצבות בלשכת התעסוקה @ Thu 11 May 2023 08:30 - 12:30 (IDT)',
+    body: '',
+    img: 'assets/img/Gmail/email-body1.png',
     isRead: false,
     sentAt: 1551133930594,
     removedAt: null,
-    from: 'momo@momo.com',
+    from: 'Google Calendar',
     to: ['tomerinbar1@gmail.com', 'user1@appsus.com', 'user2@appsus.com'],
     isStar: false,
     isDraft: false,
   },
   {
     id: 'e102',
-    subject: 'Reminder: team meeting at 2pm',
-    body: "Don't forget, we have a team meeting scheduled for 2pm today. See you there!",
+    subject:
+      'How to Prevent iPad Overheat This Summer + the Top Aviation Apps for Student Pilots',
+    body: '',
+    img: 'assets/img/Gmail/email-body2.png',
     isRead: true,
     sentAt: 1652223600000,
     removedAt: null,
-    from: 'jane@acme.com',
+    from: 'iPad Pilot News',
     to: ['tomerinbar1@gmail.com'],
     isStar: true,
     isDraft: false,
   },
   {
     id: 'e103',
-    subject: 'Important update: new product release',
-    body: 'We are excited to announce the release of our new product. Check it out on our website!',
+    subject: 'הודעה על משלוח שמספרו RS070889736NL',
+    body: '',
+    img: 'assets/img/Gmail/email-body3.png',
     isRead: false,
     sentAt: 1652200800000,
     removedAt: null,
-    from: 'marketing@company.com',
+    from: 'Israel Post',
     to: ['tomerinbar1@gmail.com'],
     isStar: true,
     isDraft: false,
   },
   {
     id: 'e104',
-    subject: 'Dinner invitation',
-    body: 'We would like to invite you to a dinner party next week. Please let us know if you can make it.',
+    subject: 'GitHub Copilot: Rediscover the joy of coding',
+    body: '',
+    img: 'assets/img/Gmail/email-body4.png',
     isRead: true,
     sentAt: 1652167200000,
     removedAt: null,
-    from: 'joe@example.com',
+    from: 'GitHub',
     to: ['tomerinbar1@gmail.com', 'user1@appsus.com'],
     isStar: false,
     isDraft: false,
   },
   {
     id: 'e105',
-    subject: 'Regarding your recent order',
-    body: 'We noticed that you ordered the wrong size for your item. Please contact us if you would like to exchange it.',
+    subject: ' מגידו תעופה בע״מ - Cancellation Notification',
+    body: '',
+    img: 'assets/img/Gmail/email-body5.png',
     isRead: false,
     sentAt: 1652148000000,
     removedAt: null,
-    from: 'support@company.com',
+    from: 'Flight Circle',
     to: ['tomerinbar1@gmail.com', 'user2@appsus.com'],
     isStar: true,
     isDraft: false,
   },
   {
     id: 'e106',
-    subject: 'Happy birthday!',
-    body: 'Wishing you a happy birthday and a great year ahead.',
+    subject:
+      '[tomerinbar1/AppSus] Run failed: pages build and deployment - main (c5f645e)',
+    body: '',
+    img: 'assets/img/Gmail/email-body6.png',
     isRead: false,
     sentAt: 1652054400000,
     removedAt: 1652056210000,
-    from: 'jenny@example.com',
+    from: logginUser.email,
     to: ['tomerinbar1@gmail.com', 'user3@appsus.com'],
     isStar: false,
     isDraft: false,
   },
   {
     id: 'e107',
-    subject: 'Happy birthday!',
-    body: 'Wishing you a happy birthday and a great year ahead.',
+    subject: "We've updated our Terms and Privacy Policy",
+    body: '',
+    img: 'assets/img/Gmail/email-body7.png',
     isRead: false,
     sentAt: 1652054400000,
     removedAt: 1652056210000,
-    from: logginUser.email,
+    from: 'Skillshare',
     to: ['user3@appsus.com'],
     isStar: true,
     isDraft: true,
   },
   {
     id: 'e108',
-    subject: 'Happy birthday!',
-    body: 'Wishing you a happy birthday and a great year ahead.',
+    subject: 'Security alert',
+    body: '',
+    img: 'assets/img/Gmail/email-body8.png',
     isRead: false,
     sentAt: 1652054400000,
     removedAt: 1652056210000,
-    from: logginUser.email,
+    from: 'Google',
     to: ['user8@appsus.com'],
     isStar: false,
     isDraft: true,
@@ -116,27 +127,43 @@ const gMails = [
 
 _createEmails()
 
-async function getEmails(filterBy) {
-  return asyncStorage.query(MAIL_KEY).then(mails => {
-    return mails.filter(mail => {
-      const { txt, isRead, status } = filterBy
+function _filterEmails(filterBy, txt, mails) {
+  return mails.filter(mail => {
+    const { txt, isRead, status } = filterBy
 
-      if (isRead === 'read' && !mail.isRead) {
-        return false
-      } else if (isRead === 'unread' && mail.isRead) {
-        return false
-      }
+    if (isRead === 'read' && !mail.isRead) {
+      return false
+    } else if (isRead === 'unread' && mail.isRead) {
+      return false
+    }
 
-      // if (status === 'starred' && !mail.isStar) {
-      //   return false
-      // }
+    if (status === 'starred' && !mail.isStar) {
+      return false
+    }
+    if (status === 'draft' && !mail.isDraft) {
+      return false
+    }
+    if (status === 'sent' && mail.from === logginUser.email) {
+      return false
+    }
+    if (status === 'bin' && !mail.removedAt) {
+      return false
+    }
 
+    if (txt) {
       const isSubjectMatch = mail.subject
         .toLowerCase()
         .includes(txt.toLowerCase())
       return isSubjectMatch
-    })
+    }
+    return true
   })
+}
+
+async function getEmails(filterBy, txt) {
+  return asyncStorage
+    .query(MAIL_KEY)
+    .then(mails => _filterEmails(filterBy, txt, mails))
 }
 
 async function getEmail(mailId) {
@@ -176,5 +203,5 @@ function _createEmails() {
 }
 
 function getDefaultFilter() {
-  return { subject: '', isRead: null }
+  return { isStar: null, isRead: null, txt: '' }
 }
