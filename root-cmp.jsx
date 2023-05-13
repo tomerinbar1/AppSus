@@ -1,28 +1,32 @@
 const { Route, Routes } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
 
-import { AppHeader } from "./cmps/AppHeader.jsx"
-import { About } from "./views/About.jsx"
-import { Home } from "./views/Home.jsx"
-import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
-import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
-import { UserMsg } from "./cmps/UserMessage.jsx"
+import { AppHeader } from './cmps/AppHeader.jsx'
+import { About } from './views/About.jsx'
+import { Home } from './views/Home.jsx'
+import { MailIndex } from './apps/mail/views/MailIndex.jsx'
+import { NoteIndex } from './apps/note/views/NoteIndex.jsx'
+import { UserMsg } from './cmps/UserMessage.jsx'
+import { MailDetails } from './apps/mail/views/MailDetails.jsx'
 import { NoteEdit } from "./apps/note/cmps/NoteEdit.jsx";
 
 
 export function App() {
-    return <Router>
-        <section className="app">
-            <AppHeader />
-            <UserMsg />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/mail" element={<MailIndex />} />
-                <Route path="/note" element={<NoteIndex />} />
+  return (
+    <Router>
+      <section className="app">
+        <AppHeader />
+        <UserMsg />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="mail" element={<MailIndex />}>
+            <Route path=":mailId" element={<MailDetails />} />
+          </Route>
+          <Route path="/note" element={<NoteIndex />} />
                 <Route path="/note/edit/:id" element={<NoteEdit />} />
-            </Routes>
-        </section>
-        
+        </Routes>
+      </section>
     </Router>
+  )
 }

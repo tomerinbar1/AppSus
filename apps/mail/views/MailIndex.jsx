@@ -1,40 +1,66 @@
 const { useEffect, useState } = React
-const { useLocation } = ReactRouterDOM
+const { useLocation, useParams } = ReactRouterDOM
 
-import { MailService } from '../services/mailService.js'
+import { mailService } from '../services/mailService.js'
 import { MailList } from '../cmps/MailList.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
-// import { MailExpand } from '../cmps/MailExpand.jsx'
+import { MailDetails } from './MailDetails.jsx'
 
 export const MailIndex = () => {
   const [mails, setMails] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedMail, setSelectedMail] = useState(null)
   const [isRead, setIsRead] = useState('all')
+  const [selectedMail, setSelectedMail] = useState(null)
+  const [menuStatus, setMenuStatus] = useState('inbox')
+
   const location = useLocation()
+  const params = useParams()
+  const { mailId } = params
   const { search } = location
   const txt = search.slice(1)
 
   useEffect(() => {
     loadMails()
-  }, [txt, isRead])
+  }, [txt, isRead, menuStatus])
+
+  useEffect(() => {
+    if (mailId) {
+      mailService.getEmail(mailId).then(mail => {
+        setSelectedMail(mail)
+      })
+    } else {
+      setSelectedMail(null)
+      loadMails()
+    }
+  }, [mailId])
 
   const loadMails = () => {
-    const filterBy = { txt, isRead}
-    MailService.getEmails(filterBy).then(mails => setMails(mails))
-    //
+    const filterBy = { txt, isRead, menuStatus }
+    mailService.getEmails(filterBy).then(mails => setMails(mails))
   }
 
   const onRemoveEmail = mailId => {
-    MailService.removeEmail(mailId)
+    mailService
+      .removeEmail(mailId)
       .then(() => {
-        console.log('Mail removed successfully')
         loadMails()
       })
       .catch(err => {
-        console.error('Error removing mail', err)
+        console.log('Error removing mail:', err)
+      })
+  }
+
+  const onToggleRead = mail => {
+    mail.isRead = !mail.isRead
+    mailService
+      .updateEmail(mail)
+      .then(() => {
+        loadMails()
+      })
+      .catch(err => {
+        console.log('Error updating mail:', err)
       })
   }
 
@@ -43,7 +69,7 @@ export const MailIndex = () => {
   }
 
   const onSendMail = mail => {
-    MailService.saveEmail(mail).then(() => {
+    mailService.saveEmail(mail).then(() => {
       onToggleModal()
       loadMails()
     })
@@ -53,8 +79,13 @@ export const MailIndex = () => {
     setSelectedMail(mailId)
   }
 
-  const readFilter = (value) => {
+  const readFilter = value => {
     setIsRead(value)
+  }
+
+  const onMenuClick = status => {
+    mailService.getEmails(status).then(mails => setMails(mails))
+    setMenuStatus(status)
   }
 
   return (
@@ -65,16 +96,25 @@ export const MailIndex = () => {
         onSendMail={onSendMail}
       />
       <div className="left-side flex column main-filter">
-        <MailMenu onToggleModal={onToggleModal} />
+        <MailMenu
+          onToggleModal={onToggleModal}
+          onMenuClick={onMenuClick}
+          mails={mails}
+        />
       </div>
       <div className="right-side mail-list flex column">
-        <MailFilter readFilter={readFilter} />
-        <MailList
-          mails={mails}
-          onRemoveEmail={onRemoveEmail}
-          onMailClick={onMailClick}
-        />
-        {/* <MailExpand mails={mails} mailId={selectedMail} /> */}
+        {selectedMail && <MailDetails mail={selectedMail} />}
+        {!mailId && (
+          <div>
+            <MailFilter readFilter={readFilter} />
+            <MailList
+              mails={mails}
+              onRemoveEmail={onRemoveEmail}
+              onToggleRead={onToggleRead}
+              onMailClick={onMailClick}
+            />{' '}
+          </div>
+        )}
       </div>
     </section>
   )

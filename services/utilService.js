@@ -6,6 +6,7 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    formatDate
 }
 
 function makeId(length = 6) {
@@ -60,3 +61,9 @@ function getMonthName(date) {
     ]
     return monthNames[date.getMonth()]
 }
+
+function formatDate(date) {
+    const options = { month: 'short', day: 'numeric' };
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    return formatter.format(date);
+  }
