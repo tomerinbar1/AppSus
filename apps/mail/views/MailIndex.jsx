@@ -1,12 +1,13 @@
 const { useEffect, useState } = React
 const { useLocation, Route, Routes, useParams } = ReactRouterDOM
 
-import { MailService } from '../services/mailService.js'
+import { mailService } from '../services/mailService.js'
 import { MailList } from '../cmps/MailList.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailDetails } from './MailDetails.jsx'
+import { MailButtons } from '../cmps/MailButtons.jsx'
 
 export const MailIndex = () => {
   const [mails, setMails] = useState([])
@@ -24,7 +25,7 @@ export const MailIndex = () => {
 
   useEffect(() => {
     if (mailId) {
-      MailService.getEmail(mailId).then(mail => {
+      mailService.getEmail(mailId).then(mail => {
         setSelectedMail(mail)
       })
     } else {
@@ -35,11 +36,11 @@ export const MailIndex = () => {
 
   const loadMails = () => {
     const filterBy = { txt, isRead }
-    MailService.getEmails(filterBy).then(mails => setMails(mails))
+    mailService.getEmails(filterBy).then(mails => setMails(mails))
   }
 
   const onRemoveEmail = mailId => {
-    MailService.removeEmail(mailId)
+    mailService.removeEmail(mailId)
       .then(() => {
         console.log('Mail removed successfully')
         loadMails()
@@ -49,12 +50,24 @@ export const MailIndex = () => {
       })
   }
 
+  const onToggleRead = mail => {
+    mail.isRead = !mail.isRead
+    mailService.updateEmail(mail)
+      .then(() => {
+        console.log('Mail updated successfully')
+        loadMails()
+      })
+      .catch(err => {
+        console.error('Error updating mail', err)
+      })
+  }
+
   const onToggleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
 
   const onSendMail = mail => {
-    MailService.saveEmail(mail).then(() => {
+    mailService.saveEmail(mail).then(() => {
       onToggleModal()
       loadMails()
     })
@@ -86,6 +99,7 @@ export const MailIndex = () => {
             <MailList
               mails={mails}
               onRemoveEmail={onRemoveEmail}
+              onToggleRead={onToggleRead}
               onMailClick={onMailClick}
             />{' '}
           </div>

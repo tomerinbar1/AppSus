@@ -1,5 +1,5 @@
 const { useEffect, useState } = React
-import { MailService } from '../services/mailService.js'
+import { mailService } from '../services/mailService.js'
 const { Link } = ReactRouterDOM
 
 export const MailDetails = ({ mail }) => {
@@ -16,7 +16,7 @@ export const MailDetails = ({ mail }) => {
 
   useEffect(() => {
     mail.isRead = true
-    MailService.updateEmail(mail).then(updatedMail => {
+    mailService.updateEmail(mail).then(updatedMail => {
       setSelectedMail(updatedMail)
     })
   }, [])

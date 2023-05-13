@@ -1,7 +1,7 @@
 import { asyncStorage } from '../../../services/AsyncStorageService.js'
 import { storageService } from '../../../services/StorageService.js'
 
-export const MailService = {
+export const mailService = {
   getEmails,
   getEmail,
   removeEmail,
