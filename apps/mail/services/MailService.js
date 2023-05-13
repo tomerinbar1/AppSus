@@ -90,7 +90,7 @@ async function getEmails(filterBy) {
       } else if (isRead === 'unread' && mail.isRead) {
         return false
       }
-      const isSubjectMatch = mail.subject.includes(txt.toLowerCase())
+      const isSubjectMatch = mail.subject.toLowerCase().includes(txt.toLowerCase())
       return isSubjectMatch
     })
   })

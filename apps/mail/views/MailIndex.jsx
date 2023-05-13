@@ -1,19 +1,20 @@
 const { useEffect, useState } = React
-const { useLocation } = ReactRouterDOM
+const { useLocation, Route, Routes, useParams } = ReactRouterDOM
 
 import { MailService } from '../services/mailService.js'
 import { MailList } from '../cmps/MailList.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
-// import { MailExpand } from '../cmps/MailExpand.jsx'
+import { MailDetails } from './MailDetails.jsx'
 
 export const MailIndex = () => {
   const [mails, setMails] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedMail, setSelectedMail] = useState(null)
   const [isRead, setIsRead] = useState('all')
+  const [selectedMail, setSelectedMail] = useState(null)
   const location = useLocation()
+  const { mailId } = useParams()
   const { search } = location
   const txt = search.slice(1)
 
@@ -21,10 +22,20 @@ export const MailIndex = () => {
     loadMails()
   }, [txt, isRead])
 
+  useEffect(() => {
+    if (mailId) {
+      MailService.getEmail(mailId).then(mail => {
+        setSelectedMail(mail)
+      })
+    } else {
+      setSelectedMail(null)
+      loadMails()
+    }
+  }, [mailId])
+
   const loadMails = () => {
-    const filterBy = { txt, isRead}
+    const filterBy = { txt, isRead }
     MailService.getEmails(filterBy).then(mails => setMails(mails))
-    //
   }
 
   const onRemoveEmail = mailId => {
@@ -53,7 +64,7 @@ export const MailIndex = () => {
     setSelectedMail(mailId)
   }
 
-  const readFilter = (value) => {
+  const readFilter = value => {
     setIsRead(value)
   }
 
@@ -68,13 +79,17 @@ export const MailIndex = () => {
         <MailMenu onToggleModal={onToggleModal} />
       </div>
       <div className="right-side mail-list flex column">
-        <MailFilter readFilter={readFilter} />
-        <MailList
-          mails={mails}
-          onRemoveEmail={onRemoveEmail}
-          onMailClick={onMailClick}
-        />
-        {/* <MailExpand mails={mails} mailId={selectedMail} /> */}
+        {selectedMail && <MailDetails mail={selectedMail} />}
+        {!mailId && (
+          <div>
+            <MailFilter readFilter={readFilter} />
+            <MailList
+              mails={mails}
+              onRemoveEmail={onRemoveEmail}
+              onMailClick={onMailClick}
+            />{' '}
+          </div>
+        )}
       </div>
     </section>
   )
