@@ -95,14 +95,14 @@ export function NoteAdd({ notes, setNotes }) {
         <form className="note-form" onSubmit={onAddNote}>
             <div className="input-container">
 
-                {selectedOption === 'img' && (<div>
+                {/* {selectedOption === 'img' && (<div>
                     <label htmlFor="title">Title</label>
                     <input onChange={handleChange} type="text" name="title" value={noteToAdd.title} id="title" /><br />
                     <label htmlFor="text">Text</label>
                     <input onChange={handleChangeText} type="text" name="txt" value={noteToAdd.info.txt} id="text" /><br />
                     <label htmlFor="Image">img</label>
-                    <input onChange={handleChangeImg} type="text" name="img" value={noteToAdd.info.url} id="img" />
-                </div>)}
+                    <input onChange={handleChangeImg} type="file" name="img" value={noteToAdd.info.url} id="img" />
+                </div>)} */}
                 {selectedOption === 'txt' && (<div>
                     <label htmlFor="title">Title</label>
                     <input onChange={handleChange} type="text" name="title" value={noteToAdd.title} id="title" /><br />
