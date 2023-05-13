@@ -1,5 +1,5 @@
 const { useEffect, useState } = React
-const { useLocation, Route, Routes, useParams } = ReactRouterDOM
+const { useLocation, useParams } = ReactRouterDOM
 
 import { mailService } from '../services/mailService.js'
 import { MailList } from '../cmps/MailList.jsx'
@@ -7,21 +7,23 @@ import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailDetails } from './MailDetails.jsx'
-import { MailButtons } from '../cmps/MailButtons.jsx'
 
 export const MailIndex = () => {
   const [mails, setMails] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isRead, setIsRead] = useState('all')
   const [selectedMail, setSelectedMail] = useState(null)
+  const [menuStatus, setMenuStatus] = useState('inbox')
+
   const location = useLocation()
-  const { mailId } = useParams()
+  const params = useParams()
+  const { mailId } = params
   const { search } = location
   const txt = search.slice(1)
 
   useEffect(() => {
     loadMails()
-  }, [txt, isRead])
+  }, [txt, isRead, menuStatus])
 
   useEffect(() => {
     if (mailId) {
@@ -35,30 +37,30 @@ export const MailIndex = () => {
   }, [mailId])
 
   const loadMails = () => {
-    const filterBy = { txt, isRead }
+    const filterBy = { txt, isRead, menuStatus }
     mailService.getEmails(filterBy).then(mails => setMails(mails))
   }
 
   const onRemoveEmail = mailId => {
-    mailService.removeEmail(mailId)
+    mailService
+      .removeEmail(mailId)
       .then(() => {
-        console.log('Mail removed successfully')
         loadMails()
       })
       .catch(err => {
-        console.error('Error removing mail', err)
+        console.log('Error removing mail:', err)
       })
   }
 
   const onToggleRead = mail => {
     mail.isRead = !mail.isRead
-    mailService.updateEmail(mail)
+    mailService
+      .updateEmail(mail)
       .then(() => {
-        console.log('Mail updated successfully')
         loadMails()
       })
       .catch(err => {
-        console.error('Error updating mail', err)
+        console.log('Error updating mail:', err)
       })
   }
 
@@ -81,6 +83,11 @@ export const MailIndex = () => {
     setIsRead(value)
   }
 
+  const onMenuClick = status => {
+    mailService.getEmails(status).then(mails => setMails(mails))
+    setMenuStatus(status)
+  }
+
   return (
     <section className="mail-app flex">
       <MailCompose
@@ -89,7 +96,11 @@ export const MailIndex = () => {
         onSendMail={onSendMail}
       />
       <div className="left-side flex column main-filter">
-        <MailMenu onToggleModal={onToggleModal} />
+        <MailMenu
+          onToggleModal={onToggleModal}
+          onMenuClick={onMenuClick}
+          mails={mails}
+        />
       </div>
       <div className="right-side mail-list flex column">
         {selectedMail && <MailDetails mail={selectedMail} />}

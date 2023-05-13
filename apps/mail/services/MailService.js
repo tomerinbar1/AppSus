@@ -24,7 +24,9 @@ const gMails = [
     sentAt: 1551133930594,
     removedAt: null,
     from: 'momo@momo.com',
-    to: ['user1@appsus.com', 'user2@appsus.com'],
+    to: ['tomerinbar1@gmail.com', 'user1@appsus.com', 'user2@appsus.com'],
+    isStar: false,
+    isDraft: false,
   },
   {
     id: 'e102',
@@ -35,6 +37,8 @@ const gMails = [
     removedAt: null,
     from: 'jane@acme.com',
     to: ['tomerinbar1@gmail.com'],
+    isStar: true,
+    isDraft: false,
   },
   {
     id: 'e103',
@@ -45,6 +49,8 @@ const gMails = [
     removedAt: null,
     from: 'marketing@company.com',
     to: ['tomerinbar1@gmail.com'],
+    isStar: true,
+    isDraft: false,
   },
   {
     id: 'e104',
@@ -55,6 +61,8 @@ const gMails = [
     removedAt: null,
     from: 'joe@example.com',
     to: ['tomerinbar1@gmail.com', 'user1@appsus.com'],
+    isStar: false,
+    isDraft: false,
   },
   {
     id: 'e105',
@@ -65,6 +73,8 @@ const gMails = [
     removedAt: null,
     from: 'support@company.com',
     to: ['tomerinbar1@gmail.com', 'user2@appsus.com'],
+    isStar: true,
+    isDraft: false,
   },
   {
     id: 'e106',
@@ -72,9 +82,35 @@ const gMails = [
     body: 'Wishing you a happy birthday and a great year ahead.',
     isRead: false,
     sentAt: 1652054400000,
-    removedAt: null,
+    removedAt: 1652056210000,
     from: 'jenny@example.com',
     to: ['tomerinbar1@gmail.com', 'user3@appsus.com'],
+    isStar: false,
+    isDraft: false,
+  },
+  {
+    id: 'e107',
+    subject: 'Happy birthday!',
+    body: 'Wishing you a happy birthday and a great year ahead.',
+    isRead: false,
+    sentAt: 1652054400000,
+    removedAt: 1652056210000,
+    from: logginUser.email,
+    to: ['user3@appsus.com'],
+    isStar: true,
+    isDraft: true,
+  },
+  {
+    id: 'e108',
+    subject: 'Happy birthday!',
+    body: 'Wishing you a happy birthday and a great year ahead.',
+    isRead: false,
+    sentAt: 1652054400000,
+    removedAt: 1652056210000,
+    from: logginUser.email,
+    to: ['user8@appsus.com'],
+    isStar: false,
+    isDraft: true,
   },
 ]
 
@@ -83,14 +119,21 @@ _createEmails()
 async function getEmails(filterBy) {
   return asyncStorage.query(MAIL_KEY).then(mails => {
     return mails.filter(mail => {
-      const { txt, isRead } = filterBy
+      const { txt, isRead, status } = filterBy
 
       if (isRead === 'read' && !mail.isRead) {
         return false
       } else if (isRead === 'unread' && mail.isRead) {
         return false
       }
-      const isSubjectMatch = mail.subject.toLowerCase().includes(txt.toLowerCase())
+
+      // if (status === 'starred' && !mail.isStar) {
+      //   return false
+      // }
+
+      const isSubjectMatch = mail.subject
+        .toLowerCase()
+        .includes(txt.toLowerCase())
       return isSubjectMatch
     })
   })
@@ -116,11 +159,11 @@ function createEmail() {
   return {
     subject: '',
     body: '',
-    isRead: false,
+    isRead: true,
     sentAt: Date.now(),
     removedAt: null,
-    from: logginUser,
-    to: [{}],
+    from: logginUser.fullName,
+    to: [],
   }
 }
 

@@ -22,7 +22,6 @@ export const MailDetails = ({ mail }) => {
   }, [])
 
   if (!selectedMail) return <div>Loading...</div>
-
   return (
     <section className="mail-details">
       <Link to=".">Back</Link>

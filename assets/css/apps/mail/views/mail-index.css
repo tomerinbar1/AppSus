@@ -9,4 +9,5 @@
 
 .left-side{
     flex-grow: 1;
+    padding-right: 15px;
 }

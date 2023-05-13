@@ -1,9 +1,16 @@
-.menu-nav a {
+.menu-nav img {
+  margin-inline-end: 15px;
+}
+
+.menu-nav > * {
+  background-repeat: no-repeat;
   display: flex;
   margin-block-end: 20px;
   align-items: end;
+  cursor: pointer;
 }
 
-.menu-nav img {
-  margin-inline-end: 15px;
+.count {
+  margin-inline-start: auto;
+  font-weight: 600;
 }
