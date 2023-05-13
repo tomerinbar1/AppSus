@@ -1,0 +1,12 @@
+.edit-input{
+
+    margin-left: 5px;
+    width: 85%;
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 4px 10px;
+    margin-bottom: 20px;
+    outline: none;
+    font-size: 1rem;
+    resize: none;
+}

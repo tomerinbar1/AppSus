@@ -20,21 +20,42 @@
     resize: none;
   }
 
-  form button{
+  .note-form  button{
     box-sizing: border-box;
     color: rgba(0,0,0,.87);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    letter-spacing: .01785714em;
     font-family: "Google Sans",Roboto,Arial,sans-serif;
     font-size: .875rem;
     font-weight: 500;
-    line-height: 1.25rem;
+    line-height: 1rem;
     height: 36px;
     padding: 8px 24px;
     border-radius: 4px;
   }
   
+
+  .select-type{
+    box-sizing: border-box;
+    color: rgba(0,0,0,.87);
+    border: 2px solid rgba(0,0,0,.87) ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1rem;
+    height: 36px;
+    padding: 8px 24px;
+    border-radius: 4px;
+
+
+
+  }
+
+
+
 /* ON NEW NOTE INPUT CLICK*/
  

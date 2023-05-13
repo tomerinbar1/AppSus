@@ -1,5 +1,6 @@
 const { useEffect, useState } = React
-const { Link } = ReactRouterDOM
+const { Link, useParams, useNavigate } = ReactRouterDOM
+
 
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NotePreview } from '../cmps/NotePreview.jsx'
@@ -9,13 +10,17 @@ import { NoteAdd } from "../cmps/NoteAdd.jsx"
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
+    const navigate = useNavigate();
+    const params = useParams();
+
 
     useEffect(() => {
         loadNotes()
     }, [])
 
+
     function onEditNote(note) {
-        console.log('Edit note function')
+
         noteService
             .saveNote(note)
             .then(loadNotes)
@@ -23,7 +28,7 @@ export function NoteIndex() {
     }
 
     function onDeleNote(noteId) {
-        console.log('noteId', noteId)
+
         noteService
             .removeNote(noteId)
             .then(value => console.log('value print noteidx', value))
@@ -46,10 +51,10 @@ export function NoteIndex() {
             <div className="add-note">
                 <NoteAdd notes={notes} setNotes={setNotes} />
             </div>
-            
+
             <NoteList onDeleNote={onDeleNote} onEditNote={onEditNote} notes={notes} />{' '}
             {/* Pass the notes prop here */}
-           
+
         </section>
     )
 }

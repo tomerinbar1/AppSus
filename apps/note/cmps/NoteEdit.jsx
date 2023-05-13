@@ -1,61 +1,84 @@
-const { useEffect, useState } = React
-const { useParams, useNavigate } = ReactRouterDOM
+const { useEffect, useState, useRef } = React
+const { useParams, useNavigate, NavLink } = ReactRouterDOM
+import { noteService } from '../services/NoteService.js';
 
-import { noteService } from '../services/NoteService.js'
 
-export function NoteEdit(note) {
-  const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
+
+export function NoteEdit() {
+  const [noteToEdit, setNoteToEdit] = useState({})
+  const inputRef = useRef()
   const navigate = useNavigate()
-  // const params = useParams()
-  
+  const params = useParams()
+
+
 
   useEffect(() => {
-    if (note.Id) loadNote()
+    if (params.id) {
+      loadNote()
+
+    }
   }, [])
 
   function loadNote() {
     noteService
-      .get(note.Id)
-      .then(setNoteToEdit)
+      .getNote(params.id)
+      .then(note => {
+        setNoteToEdit(note)
+      })
       .catch(err => {
-        console.log("Couldn't edit the note", err)
+        console.log('Had issued in note edit:', err)
         navigate('/note')
       })
   }
 
   function handleChange({ target }) {
+
     const field = target.name
     const value = target.type === 'number' ? +target.value || '' : target.value
     setNoteToEdit(prevNote => ({ ...prevNote, [field]: value }))
   }
+  function handleChangeText({ target }) {
+    const field = target.name;
+    const value = target.type === 'number' ? +target.value || '' : target.value;
+
+    setNoteToEdit((prevNote) => ({
+      ...prevNote,
+      info: {
+        ...prevNote.info,
+        txt: value,
+      },
+    }))
+  }
 
   function onSaveNote(ev) {
     ev.preventDefault()
-    noteService.saveNote(noteToEdit).then(() => {
-      navigate('/note')
-    })
+    noteService.saveNote(noteToEdit)
+      .then(note => {
+        const updatedNote = noteToEdit
+        setNoteToEdit(updatedNote)
+        navigate('/note')
+      })
+
   }
 
-  const { type, txt } = noteToEdit
+
+  const { title, text } = noteToEdit
 
   return (
-    <section className="note-filter">
-      <h2>{noteToEdit.id ? 'Edit' : 'Add'} Edit</h2>
-      <form onSubmit={onSaveNote}>
-        <label htmlFor="txt">Note text:</label>
-        <input
-          value={txt}
-          onChange={handleChange}
-          name="txt"
-          id="txt"
-          type={type}
-          placeholder="Enter note"
-        />
+    <section className="note-edit">
 
-        <button className="button button--blue">
-          {noteToEdit.id ? 'Save' : 'Add'}
-        </button>
+
+      <form onSubmit={onSaveNote}>
+        <label htmlFor="title">Title:</label>
+        <input className="edit-input" onChange={handleChange} value={title} type="text" name="title" id="title" /><br />
+
+        <label htmlFor="txt">Text:</label>
+        <input className="edit-input" onChange={handleChangeText} value={text} type="text" name="txt" id="txt" /><br />
+
+        <button type="submit">Save</button>
       </form>
+
     </section>
   )
+
 }

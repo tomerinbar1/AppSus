@@ -80,27 +80,16 @@ export const noteService = {
     removeNote,
     saveNote,
     createNote,
-    getEmptyNote,
-    // extractVideoIdFromURL
+
+
 }
 
-function getEmptyNote(txt = '') {
-    return {
-        txt,
-        type: 'NoteTxt'
-    }
-}
 
-// function extractVideoIdFromURL(url) {
-//     const urlParams = new URLSearchParams(new URL(url).search)
-//     const newVideoId = urlParams.get('v')
-//     if (!newVideoId) return url
-//     else return newVideoId
-//   }
+
 
 function createNote() {
     return {
-        title :'Title',
+        title: 'Title',
         createdAt: Date.now(),
         type: 'Text',
         isPinned: true,

@@ -9,17 +9,22 @@
   align-content: center;
   background-color: #c8c4c5;
   width: 80vw;
+  border-radius: 7px;
 }
 
 .note-list{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  width: fit-content;
+  align-content: space-between;
 }
 
  .note-list li {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: column;
     background: #ffffff;
-    width: 240px;
     height: fit-content;
     border-radius: 7px;
     box-shadow: 0 2px 5px rgb(175, 175, 175);
@@ -47,17 +52,20 @@
   
   .note p {
     font-size: 1.125rem;
-    
     margin-bottom: 10px;
     white-space: pre-wrap;
     word-wrap: break-word;
   }
   
   .note button {
+    width: 50px;
+    border-radius: 4px;
+    align-content: center;
     position: relative;
+    font-weight: 600;
     float: right;
-    color: #f88651;
-    border: none;
+    color: rgb(46, 42, 42);
+    border: 2px solid rgb(44, 41, 41);
     background: none;
     cursor: pointer;
     outline: none;
