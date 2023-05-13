@@ -1,5 +1,4 @@
 export const MailFilter = ({ onHandleReadClick }) => {
-  
   const handleChange = ev => {
     const { value } = ev.target
     onHandleReadClick(value)

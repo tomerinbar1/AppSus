@@ -1,8 +1,6 @@
 const { useEffect, useState, useRef } = React
 const { useParams, useNavigate, NavLink } = ReactRouterDOM
-import { noteService } from '../services/NoteService.js';
-
-
+import { noteService } from '../services/NoteService.js'
 
 export function NoteEdit() {
   const [noteToEdit, setNoteToEdit] = useState({})
@@ -10,12 +8,9 @@ export function NoteEdit() {
   const navigate = useNavigate()
   const params = useParams()
 
-
-
   useEffect(() => {
     if (params.id) {
       loadNote()
-
     }
   }, [])
 
@@ -32,16 +27,15 @@ export function NoteEdit() {
   }
 
   function handleChange({ target }) {
-
     const field = target.name
     const value = target.type === 'number' ? +target.value || '' : target.value
     setNoteToEdit(prevNote => ({ ...prevNote, [field]: value }))
   }
   function handleChangeText({ target }) {
-    const field = target.name;
-    const value = target.type === 'number' ? +target.value || '' : target.value;
+    const field = target.name
+    const value = target.type === 'number' ? +target.value || '' : target.value
 
-    setNoteToEdit((prevNote) => ({
+    setNoteToEdit(prevNote => ({
       ...prevNote,
       info: {
         ...prevNote.info,
@@ -52,33 +46,42 @@ export function NoteEdit() {
 
   function onSaveNote(ev) {
     ev.preventDefault()
-    noteService.saveNote(noteToEdit)
-      .then(note => {
-        const updatedNote = noteToEdit
-        setNoteToEdit(updatedNote)
-        navigate('/note')
-      })
-
+    noteService.saveNote(noteToEdit).then(note => {
+      const updatedNote = noteToEdit
+      setNoteToEdit(updatedNote)
+      navigate('/note')
+    })
   }
-
 
   const { title, text } = noteToEdit
 
   return (
     <section className="note-edit">
-
-
       <form onSubmit={onSaveNote}>
         <label htmlFor="title">Title:</label>
-        <input className="edit-input" onChange={handleChange} value={title} type="text" name="title" id="title" /><br />
+        <input
+          className="edit-input"
+          onChange={handleChange}
+          value={title}
+          type="text"
+          name="title"
+          id="title"
+        />
+        <br />
 
         <label htmlFor="txt">Text:</label>
-        <input className="edit-input" onChange={handleChangeText} value={text} type="text" name="txt" id="txt" /><br />
+        <input
+          className="edit-input"
+          onChange={handleChangeText}
+          value={text}
+          type="text"
+          name="txt"
+          id="txt"
+        />
+        <br />
 
         <button type="submit">Save</button>
       </form>
-
     </section>
   )
-
 }

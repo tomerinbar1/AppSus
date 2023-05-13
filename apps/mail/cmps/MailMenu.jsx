@@ -59,7 +59,7 @@ export const MailMenu = ({ onToggleModal, mails, onHandleMenuClick }) => {
           <img src={bin} alt="Bin" />
           <span>Bin</span>
           <span className="count">
-            {(mails.filter(mail => mail.removedAt).length)}
+            {mails.filter(mail => mail.removedAt).length}
           </span>
         </div>
       </section>
